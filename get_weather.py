@@ -13,7 +13,7 @@ def get_weather_data(city):
     engine = sqlalchemy.create_engine(uri.format(password, ip_address, port))
 
     columns = ['temp', 'dew_temp', 'pressure', 'wind_speed']
-    query = "SELECT AVG({}), AVG({}), AVG({}) FROM tempdata WHERE city=%s".format(
+    query = "SELECT AVG({}), AVG({}), AVG({}), AVG({}) FROM tempdata WHERE city=%s".format(
         *columns)
 
     with engine.connect() as conn:
@@ -38,7 +38,7 @@ def main(request):
     elif request_json and 'city' in request_json:  # GET request
         return get_weather_data(request_json['city'])
     else:
-        return f'City not found or request was bad.'
+        return 'City not found or request was bad.'
 
 
 if __name__ == '__main__':
