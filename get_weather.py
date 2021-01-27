@@ -5,7 +5,7 @@ import sqlalchemy
 
 
 def get_weather_data(city):
-    password = os.environ.get('PW')
+    password = os.getenv('PW')
     ip_address = '35.230.110.188'
     port = '5432'
     uri = 'postgresql://postgres:{}@{}:{}/postgres'
