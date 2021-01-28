@@ -6,11 +6,11 @@ import sqlalchemy
 
 def get_weather_data(city):
     password = os.getenv('PW')
-    ip_address = '35.230.110.188'
-    port = '5432'
-    uri = 'postgresql://postgres:{}@{}:{}/postgres'
+    ip_address = os.getenv('IP')
+    port = os.getenv('PORT')
+    uri = f'postgresql://postgres:{password}@{ip_address}:{port}/postgres'
 
-    engine = sqlalchemy.create_engine(uri.format(password, ip_address, port))
+    engine = sqlalchemy.create_engine(uri)
 
     columns = ['temp', 'dew_temp', 'pressure', 'wind_speed']
     query = "SELECT AVG({}), AVG({}), AVG({}), AVG({}) FROM tempdata WHERE city=%s".format(
